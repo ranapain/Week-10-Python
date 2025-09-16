@@ -1,0 +1,20 @@
+class Job:
+    def __init__(self, id, dead, profit):
+        self.id = id
+        self.dead = dead
+        self.profit = profit
+
+def JobScheduling(Jobs, n):
+    Jobs.sort(key=lambda x: x.profit, reverse=True)
+    max_dead = max(job.dead for job in Jobs)
+    slots = [-1] * (max_dead + 1)
+    count, profit = 0, 0
+    
+    for job in Jobs:
+        for d in range(job.dead, 0, -1):
+            if slots[d] == -1:
+                slots[d] = job.id
+                count += 1
+                profit += job.profit
+                break
+    return [count, profit]
