@@ -1,0 +1,14 @@
+def findPlatform(arr, dep, n):
+    arr.sort()
+    dep.sort()
+    i = j = 0
+    plat_needed = res = 0
+    while i < n and j < n:
+        if arr[i] <= dep[j]:
+            plat_needed += 1
+            res = max(res, plat_needed)
+            i += 1
+        else:
+            plat_needed -= 1
+            j += 1
+    return res
